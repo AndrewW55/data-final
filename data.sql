@@ -110,22 +110,11 @@ INSERT INTO pro_bowl (season_year, conference, position_id) VALUES
 -- J.Allen(13)→AFC QB(1 prev year — multi-year example via extra rows)
 -- ============================================================
 INSERT INTO player_pro_bowl (player_id, pro_bowl_id) VALUES
-  (1,  1),   -- Mahomes → 2024 AFC QB
-  (5,  2),   -- Purdy   → 2024 NFC QB
-  (7,  4),   -- McCaffrey → 2024 NFC RB
-  (3,  3),   -- Pacheco → 2024 AFC RB
-  (13, 1),   -- Josh Allen also at AFC QB slot (different season handled via additional rows below)
-  (19, 7),   -- Saquon Barkley → no, correcting: player_id 19 is Saquon; pro_bowl_id 4 NFC RB
-  (23, 3);   -- Derrick Henry → 2024 AFC RB (replacing Pacheco row for realism)
-
--- Clean up duplicate — in real usage you'd insert carefully; this is sample data
-DELETE FROM player_pro_bowl WHERE player_id = 3 AND pro_bowl_id = 3;
-DELETE FROM player_pro_bowl WHERE player_id = 13 AND pro_bowl_id = 1;
-
--- Reinsert clean
-INSERT INTO player_pro_bowl (player_id, pro_bowl_id) VALUES
-  (23, 3),   -- Derrick Henry → 2024 AFC RB
-  (19, 4);   -- Saquon Barkley → 2024 NFC RB
+  (1,  1),   -- Mahomes       -> 2024 AFC QB
+  (5,  2),   -- Purdy         -> 2024 NFC QB
+  (23, 3),   -- Derrick Henry -> 2024 AFC RB
+  (7,  4),   -- McCaffrey     -> 2024 NFC RB
+  (19, 4);   -- Saquon        -> 2024 NFC RB (also nominated, same slot)
 
 -- ============================================================
 -- SUPER BOWL  (10 recent Super Bowls)
