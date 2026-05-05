@@ -13,16 +13,18 @@ from mysql.connector import Error
 #  CONNECTION
 # ─────────────────────────────────────────────
 
-def create_connection(host="localhost", database="nfl_roster",
-                      user="root", password="password"):
+def create_connection(host="127.0.0.1", database="nfl_roster",
+                      user="root", password="nflpassword", port=3306):
     """Open and return a MySQL connection, or None on failure."""
     try:
         conn = mysql.connector.connect(
             host=host,
+            port=port,
             database=database,
             user=user,
             password=password,
-            autocommit=False
+            autocommit=False,
+            use_pure=True       # force pure-Python driver, avoids C-ext socket issues
         )
         if conn.is_connected():
             return conn

@@ -358,12 +358,15 @@ def main():
 
     # ── Connection setup ──
     print(f"\n{BOLD}Database Connection{RESET}")
-    host     = input("  Host     [localhost]: ").strip() or "localhost"
+    print(f"  {YELLOW}Docker defaults shown — press Enter to accept{RESET}")
+    host     = input("  Host     [127.0.0.1]: ").strip() or "127.0.0.1"
+    port_raw = input("  Port     [3306]: ").strip()
+    port     = int(port_raw) if port_raw.isdigit() else 3306
     database = input("  Database [nfl_roster]: ").strip() or "nfl_roster"
     user     = input("  User     [root]: ").strip() or "root"
-    password = input("  Password: ").strip()
+    password = input("  Password [nflpassword]: ").strip() or "nflpassword"
 
-    conn = create_connection(host, database, user, password)
+    conn = create_connection(host, database, user, password, port)
     if not conn:
         print(f"\n  {RED}Could not connect to MySQL. Check your credentials and try again.{RESET}")
         sys.exit(1)
