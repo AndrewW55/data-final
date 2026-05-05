@@ -5,6 +5,22 @@ NFL Roster Tracker — command-line application.
 Run:  python main.py
 """
 
+"""
+# 1. Start the container
+docker run --name nfl-mysql \
+  -e MYSQL_ROOT_PASSWORD=nflpassword \
+  -e MYSQL_DATABASE=nfl_roster \
+  -p 3306:3306 \
+  -d mysql:8.0
+
+# 2. Wait ~15 seconds, then load the SQL
+docker exec -i nfl-mysql mysql -u root -pnflpassword nfl_roster < sql/schema.sql
+docker exec -i nfl-mysql mysql -u root -pnflpassword nfl_roster < sql/data.sql
+
+# 3. Run the app — just hit Enter at every prompt to use Docker defaults
+python main.py
+"""
+
 import sys
 from database import (
     create_connection,
